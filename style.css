@@ -1,0 +1,40 @@
+.body_page {
+
+	width: 62%;
+	margin-left: 30%;
+	margin-top: 3%;
+}
+.sidbar_page {
+	margin-left: 6.5%;
+	margin-top: -2%;
+
+}
+
+.list-group {
+
+     width: 20%;
+     margin:auto;
+     float:left;
+     padding-top:20px;
+
+    }
+
+.list-group-item {
+
+	color: black; 
+}
+
+    
+.project-tab {
+    width: 100%;
+    margin-left: -2%;
+    margin-top: -1%;
+
+}
+
+.project-tab thead{
+    background: #f3f3f3;
+    color: #333;
+    width: 100%;
+}
+

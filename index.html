@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>Catalogue Des PFES</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="fichier.js"></script>
+    <link href="bootstrap4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome2/css/all.min.css" rel="stylesheet">
+
+	<script >
+        var xhr = new XMLHttpRequest();
+        var connect = "vide";    
+        function recuperer_touspfe() {
+            xhr.open("GET", "https://appessat707.000webhostapp.com/pfes.php ", true);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    remplir(xhr.responseXML);
+                }
+            }
+        }
+
+        function recuperer_pfetelecom() {
+            xhr.open("GET", "https://appessat707.000webhostapp.com/pfespartypes.php?type=Telecom", true);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    remplir(xhr.responseXML);
+                }
+            }
+        }
+
+        function recuperer_pfedevp() {
+            xhr.open("GET", "https://appessat707.000webhostapp.com/pfespartypes.php?type=Developpement", true);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    remplir(xhr.responseXML);
+                }
+            }
+        }
+
+        function recuperer_pfereseau() {
+            xhr.open("GET", "https://appessat707.000webhostapp.com/pfespartypes.php?type=reseaux", true);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    remplir(xhr.responseXML);
+                }
+            }
+        }
+
+        function recuperer_pfeemb() {
+            xhr.open("GET", "https://appessat707.000webhostapp.com/pfespartypes.php?type=Embarques et IoT ", true);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    remplir(xhr.responseXML);
+                }
+            }
+        }
+
+
+        function remplir(data) {
+            var els = data.getElementsByTagName("pfe");
+            var liste = document.getElementById("tableBody");
+            liste.innerHTML = "";
+            for (var i = 0; i < els.length; i++) {
+                var tr = document.createElement('tr');
+                var id = document.createElement('td');
+                var titre = document.createElement('td');
+                var type = document.createElement('td');
+                id.innerHTML = els[i].getAttribute('id');
+                titre.innerHTML = els[i].getAttribute('titre');
+                type.innerHTML = els[i].getAttribute('type');
+                tr.appendChild(id);
+                tr.appendChild(titre);
+                tr.appendChild(type);
+                liste.appendChild(tr);
+            }
+        }
+    </script>
+</head>
+
+<body onload="recuperer_touspfe()" >
+	<div class="bg-primary">
+
+		<div class="container p-2 my-3 bg-primary text-white">
+			<h1>Catalogue des PFEs (ESSAT)</h1>
+		</div>
+	
+	</div>
+
+	<div class="sidbar_page">
+
+		<div class="list-group">
+    <a href="#" class="list-group-item active" onclick="recuperer_touspfe()" > <i class="fa fa-th-large"></i> Tous les PFEs<span
+        class="badge badge-warning badge-pill float-right">13</span></a>
+    <a href="#" class="list-group-item" onclick="recuperer_pfetelecom()"><i class="fa fa-th-large"></i> PFEs Télecom <span
+        class="badge bg-info badge-primary badge-pill float-right">3</span></a>
+    <a href="#" class="list-group-item" onclick="recuperer_pfedevp()"><i class="fa fa-th-large"></i> PFEs Développement <span
+        class="badge badge-primary bg-info badge-pill float-right">4</span></a>
+    <a href="#" class="list-group-item" onclick="recuperer_pfereseau()"><i class="fa fa-th-large"></i> PFEs Réseaux <span
+        class="badge badge-primary bg-info badge-pill float-right">3</span></a>
+    <a href="#" class="list-group-item" onclick="recuperer_pfeemb()"><i class="fa fa-th-large"></i> PFEs Embarqués et loT <span
+        class="badge badge-primary bg-info badge-pill float-right">3</span></a>
+  
+  		</div>
+		
+	</div>
+
+	<div class="body_page">
+
+			<div class="container p-3 my-2 bg-success text-white">
+			<h5>Liste des PFEs</h5>
+			</div>
+
+        <section id="tabs" class="project-tab">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                	<div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <table class="table" >
+                                <thead>
+                                    <tr>
+                                        <th width="50">ID</th>
+                                        <th width="600">Titre</th>
+                                        <th width="200">Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody" >
+        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+</body>
+</html>
